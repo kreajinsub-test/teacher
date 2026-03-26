@@ -1,0 +1,26 @@
+{
+  "name": "Multi-Agent-RAG-Env",
+  "image": "mcr.microsoft.com/devcontainers/anaconda:3",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20" 
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code",
+        "ms-python.python",
+        "ms-toolsai.jupyter"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "/opt/conda/envs/rag-agent-env/bin/python"
+      }
+    }
+  },
+
+  // 이제 node가 확실히 있으므로 npm install이 에러 없이 돌아갑니다.
+  "postCreateCommand": "sudo apt-get update && sudo apt-get install -y graphviz git-lfs libmagic-dev poppler-utils && conda env create -f environment.yml && conda init bash && echo 'conda activate rag-agent-env' >> ~/.bashrc && npm install -g @anthropic-ai/claude-code"
+}
